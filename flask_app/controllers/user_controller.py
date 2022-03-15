@@ -10,3 +10,16 @@ bcrypt = Bcrypt(app)
 @app.route("/")
 def index():
     return render_template("index.html")
+
+# =========================
+# Process Register Route 
+# =========================
+@app.route("/register", methods=["POST"])
+def register():
+    # 1. validate form information
+    if not User.validate_register(register.form):
+        return redirect("/") 
+    # 2. register user == save them to the database 
+    # 3. Put id into session, effectively logging them in
+    # 4. send them where they need to go. Go to dashboard
+    return redirect("/dashboard")
