@@ -13,9 +13,16 @@
             <h3 class="nav-title">NoteTaker</h3>
         </nav>
         <div class="row">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <p class="text-danger">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <div class="col">
                 <h2>Sign Up</h2>
-                <form action="/registration" method="post">
+                <form action="/register" method="post">
                     <div class="form-group">
                         <label for="first_name">First Name</label>
                         <input type="text" class="form-control" id="first_name" placeholder="First Name" name="first_name">

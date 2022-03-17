@@ -3,6 +3,8 @@ from flask import flash
 from flask_app import app
 from flask_bcrypt import Bcrypt 
 bcrypt = Bcrypt(app)
+import re 
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class User:
     def __init__(self, data):
@@ -20,4 +22,16 @@ class User:
         if len(form_data['first_name']) < 2:
             flash("First name must be at least 2 characters")
             is_valid = False 
-            
+        if len(form_data['last_name']) < 2:
+            flash("Last name must be at least 2 characters")
+            is_valid = False
+        if len(form_data['password']) < 8:
+            flash("Password must be at least 8 characters")
+            is_valid = False
+        if form_data['password'] != form_data['confirmation_pass']:
+            flash("Passwords must match!")
+            is_valid = False  
+        if not EMAIL_REGEX.match(form_data['email']):
+            flash("Please enter a valid email!")
+            is_valid = False
+        return is_valid

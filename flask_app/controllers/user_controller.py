@@ -14,10 +14,10 @@ def index():
 # =========================
 # Process Register Route 
 # =========================
-@app.route("/register", methods=["POST"])
+@app.route("/register", methods=['POST'])
 def register():
     # 1. validate form information
-    if not User.validate_register(register.form):
+    if not User.validate_register(request.form):
         return redirect("/") 
     # 2. register user == save them to the database 
     # 3. Put id into session, effectively logging them in
