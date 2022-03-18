@@ -32,3 +32,10 @@ def register():
     session['user_id'] = user_id
     # 4. send them where they need to go. Go to dashboard
     return redirect("/dashboard")
+
+# =========================
+# Render Dashboard Route 
+# =========================
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
