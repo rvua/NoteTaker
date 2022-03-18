@@ -35,3 +35,9 @@ class User:
             flash("Please enter a valid email!")
             is_valid = False
         return is_valid
+    
+    @classmethod
+    def save_user(cls, data):
+        query = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, NOW(), NOW());"
+        results = connectToMySQL("note_taker_db").query_db(query, data)
+        return results

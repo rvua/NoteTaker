@@ -19,7 +19,16 @@ def register():
     # 1. validate form information
     if not User.validate_register(request.form):
         return redirect("/") 
-    # 2. register user == save them to the database 
+    # 2. register user == save them to the database
+    pw_hash = bcrypt.generate_password_hash(request.form['password'])
+    data = {
+        "first_name" : request.form['first_name'],
+        "last_name" : request.form['last_name'],
+        "email" : request.form['email'],
+        "password" : pw_hash,
+    }
+    user_id = User.save_user(data)
     # 3. Put id into session, effectively logging them in
+    session['user_id'] = user_id
     # 4. send them where they need to go. Go to dashboard
     return redirect("/dashboard")
