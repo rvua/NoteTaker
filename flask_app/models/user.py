@@ -36,8 +36,21 @@ class User:
             is_valid = False
         return is_valid
     
+    @staticmethod
+    def validate_login(form_data):
+        is_valid = True 
+        user_in_db = User.get_by_email(form_data)
+    
     @classmethod
     def save_user(cls, data):
         query = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, NOW(), NOW());"
         results = connectToMySQL("note_taker_db").query_db(query, data)
         return results
+    
+    @classmethod
+    def get_by_email(cls, data):
+        query = "SELECT * FROM users WHERE email = %(email)s;"
+        result = connectToMySQL("note_taker_db").query_db(query, data)
+        if len(result) < 1:
+            return False
+        return cls(result[0]) 
