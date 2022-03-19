@@ -40,6 +40,13 @@ class User:
     def validate_login(form_data):
         is_valid = True 
         user_in_db = User.get_by_email(form_data)
+
+        if not user_in_db:
+            flash("Invalid Credentials")
+            is_valid = False
+        elif not bcrypt.check_password_hash(user_in_db.password, form_data['password']):
+            is_valid = False
+        return is_valid  
     
     @classmethod
     def save_user(cls, data):
