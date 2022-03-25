@@ -31,6 +31,7 @@ def register():
     # 3. Put id into session, effectively logging them in
     session['user_id'] = user_id
     # 4. send them where they need to go. Go to dashboard
+    flash("Successful User Registration")
     return redirect("/dashboard")
 
 # 4 =========================
@@ -56,4 +57,8 @@ def login():
 # ===========================
 @app.route("/dashboard")
 def dashboard():
+    data = {
+        "user_id" : session['user_id']
+    }
+    User.get_by_id(data)
     return render_template("dashboard.html")
