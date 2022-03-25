@@ -42,8 +42,13 @@ def login():
     if not User.validate_login(request.form):
         return redirect("/")
     # 2. login the validated user / add id to session
+    data = {
+        "email" : request.form['email']
+    }
+    logged_user = User.get_by_email(data)
+    session['user_id'] = logged_user.id
     # 3. send them where they need to go i.e. the dashboard
-
+    flash("Successful User Login")
     return redirect("/dashboard")
 
 # 3 =========================

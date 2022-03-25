@@ -45,6 +45,7 @@ class User:
             flash("Invalid Credentials")
             is_valid = False
         elif not bcrypt.check_password_hash(user_in_db.password, form_data['password']):
+            flash("Invalid Credentials")
             is_valid = False
         return is_valid  
     
