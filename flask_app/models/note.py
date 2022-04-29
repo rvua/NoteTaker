@@ -11,4 +11,7 @@ class Note:
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
 
-    
+    @staticmethod
+    def validate_note(form_data):
+        is_valid = True 
+        
