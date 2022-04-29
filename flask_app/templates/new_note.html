@@ -9,16 +9,11 @@
 </head>
 <body>
     <div class="container">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for message in messages %}
-        <p class="text-success">{{message}}</p>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
-        <a href="/logout" class="float-end mt-2 btn btn-danger">logout</a>
-        <h1>Welcome <span>{{user.first_name}}</span></h1>
-        <a href="/new_note" class="btn btn-primary mt-2">Create a new note</a>
+        <a href="/dashboard" class="float-end mt-2 btn btn-primary">Dashboard</a>
+        <h1>Create New Note</h1>
+        <form action="/create_note" method="post">
+            <button type="submit" class="btn btn-dark">Create</button>
+        </form>
     </div>
 </body>
 </html>
