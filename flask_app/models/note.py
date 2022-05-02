@@ -14,4 +14,11 @@ class Note:
     @staticmethod
     def validate_note(form_data):
         is_valid = True 
+        if len(form_data['title']) == 0:
+            flash("Enter a title for the note")
+            is_valid = False 
+        if len(form_data['description']) < 2: 
+            flash("Your description must be at least 2 characters long")
+            is_valid = False
+        return is_valid
         
