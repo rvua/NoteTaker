@@ -10,11 +10,18 @@
 <body>
     <div class="container">
         <a href="/dashboard" class="float-end mt-2 btn btn-primary">Dashboard</a>
-        <h1>Create New Note</h1>
+        <h1>New Note</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <p class="text-success">{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
         <form action="/create_note" method="post">
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" placeholder="Title" name="title">
+                <input type="text" class="form-control" id="title" placeholder="Title of note" name="title">
             </div>
             <div class="form-group">
                 <label for="description">Description</label>

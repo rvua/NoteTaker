@@ -17,8 +17,13 @@ class Note:
         if len(form_data['title']) == 0:
             flash("Enter a title for the note")
             is_valid = False 
-        if len(form_data['description']) < 2: 
-            flash("Your description must be at least 2 characters long")
+        if len(form_data['description']) == 0: 
+            flash("Provide a description so readers get a glimpse")
             is_valid = False
         return is_valid
         
+    @classmethod 
+    def save_note(cls, data):
+        query = "INSERT INTO notes (title, description, note, user_id, created_at, updated_at) VALUES (%(title)s, %(description)s, %(note)s, %(user_id)s, NOW(), NOW());"
+        results = connectToMySQL("note_taker_db").query_db(query, data)
+        return results 
